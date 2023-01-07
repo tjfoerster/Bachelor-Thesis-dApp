@@ -1,3 +1,5 @@
+## About
+
 The project base is forked from [MetaMask/Nextjs-Starter](https://github.com/MetaMask/Nextjs-Starter)
 
 This dApp is a prototype that is intended to illustrate the approach of blockchain technology in the area of classic ERP systems. It represents a business use case from human resource management.
