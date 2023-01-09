@@ -12,10 +12,13 @@ Technologies used are:
 
 ## Get started
 1. Checkout this repository.
-2. `npm run dev`
-3. Get [MetaMask](https://metamask.io/) for your browser.
+2. Switch in the project folder and run `npm install`
+3. Run `truffle compile` to build production ready files for the blockchain.
 4. Get [Ganache](https://trufflesuite.com/ganache/) for your system.
-5. Host a local ethereum blockchain with Ganache for experimenting.
-6. Connect MetaMask to your local blockchain.
-7. Import accounts into Metamask from your local blockchain.
-8. Have fun with the dApp!
+5. Host a local ethereum blockchain with Ganache for experimenting. (Use port 7545 or edit truffle-config.js!)
+6. Deploy the smart contracts to blockchain with `truffle deploy`.
+7. Run `npm dev` and open in your browser `http://localhost:3000`.
+8. Get [MetaMask](https://metamask.io/) for your browser.
+9. Connect MetaMask to your local blockchain.
+10. Import accounts into Metamask from your local blockchain.
+11. Have fun with the dApp!
