@@ -6,8 +6,8 @@ This dApp is a prototype that is intended to illustrate the approach of blockcha
 
 Technologies used are:
 - [MetaMask](https://metamask.io/) is a crypto wallet and gateway to dApps as a browser extension
-- [Truffle Suite](https://trufflesuite.com/) for developing of smart contracts (for the Ethereum blockchain)
-- [Solidity](https://docs.soliditylang.org/en/latest/) is the programming language for smart contracts (Ethereum)
+- [Truffle Suite](https://trufflesuite.com/) are tools for smart contract development. (I use Truffle and Ganache)
+- [Solidity](https://docs.soliditylang.org/en/latest/) is the programming language for smart contracts.
 - [NextJS](https://nextjs.org/) for the ui of the dApp
 
 ## Get started
@@ -20,5 +20,5 @@ Technologies used are:
 7. Run `npm dev` and open in your browser [http://localhost:3000](http://localhost:3000).
 8. Get [MetaMask](https://metamask.io/) for your browser.
 9. Connect MetaMask to your local blockchain.
-10. Import accounts into Metamask from your local blockchain.
+10. Import accounts into MetaMask from your local blockchain.
 11. Have fun with the dApp!
