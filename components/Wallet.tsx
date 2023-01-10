@@ -2,6 +2,13 @@ import Link from "next/link";
 import { useListen } from "../hooks/useListen";
 import { useMetamask } from "../hooks/useMetamask";
 import { Loading } from "./Loading";
+import truffleConfig from "../truffle-config";
+import Web3 from "web3";
+import React from "react";
+
+export const web3 = new Web3(
+  Web3.givenProvider || `http://${truffleConfig.networks.development.host}:${truffleConfig.networks.development.port}`
+);
 
 export default function Wallet() {
   const {
@@ -19,15 +26,10 @@ export default function Wallet() {
 
   const handleConnect = async () => {
     dispatch({ type: "loading" });
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
+    const accounts = await web3.eth.requestAccounts();
 
     if (accounts.length > 0) {
-      const balance = await window.ethereum!.request({
-        method: "eth_getBalance",
-        params: [accounts[0], "latest"],
-      });
+      const balance = await web3.eth.getBalance(accounts[0]);
       dispatch({ type: "connect", wallet: accounts[0], balance });
 
       // we can register an event listener for changes to the users wallet
@@ -37,24 +39,6 @@ export default function Wallet() {
 
   const handleDisconnect = () => {
     dispatch({ type: "disconnect" });
-  };
-
-  const handleAddUsdc = async () => {
-    dispatch({ type: "loading" });
-
-    await window.ethereum.request({
-      method: "wallet_watchAsset",
-      params: {
-        type: "ERC20",
-        options: {
-          address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-          symbol: "USDC",
-          decimals: 18,
-          image: "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg?v=023",
-        },
-      },
-    });
-    dispatch({ type: "idle" });
   };
 
   return (
@@ -77,7 +61,7 @@ export default function Wallet() {
                     <p className="text-sm text-white">
                       Balance:{" "}
                       <span>
-                        {(parseInt(balance) / 1000000000000000000).toFixed(4)}{" "}
+                        {(parseInt(balance) / 1e18).toFixed(4)}{" "}
                         ETH
                       </span>
                     </p>
@@ -107,12 +91,6 @@ export default function Wallet() {
 
         {isConnected && (
           <div className="flex  w-full justify-center space-x-2">
-            <button
-              onClick={handleAddUsdc}
-              className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto"
-            >
-              {status === "loading" ? <Loading /> : "Add Token"}
-            </button>
             <button
               onClick={handleDisconnect}
               className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto"

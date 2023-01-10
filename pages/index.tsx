@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useEffect } from "react";
+import React from "react";
 import Body from "../components/Body";
 import Wallet from "../components/Wallet";
 import { useListen } from "../hooks/useListen";
@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   const { dispatch } = useMetamask();
   const listen = useListen();
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (typeof window !== undefined) {
       // start by checking if window.ethereum is present, indicating a wallet extension
       const ethereumProviderInjected = typeof window.ethereum !== "undefined";
