@@ -23,7 +23,8 @@ export default function Body() {
     }
 
     const [lastBlocks, setLastBlocks] = React.useState<BlockValue[]>([]);
-    const updateTransactionHistory = async () => {
+    const [updateTrigger, setUpdateTrigger] = React.useState<number>(1);
+    React.useMemo(async () => {
         const currentBlockNumber = await web3.eth.getBlockNumber();
         updateCurrentValue(currentBlockNumber);
 
@@ -37,14 +38,13 @@ export default function Body() {
             i--;
         }
         setLastBlocks(newArray);
-    }
-    updateTransactionHistory(); //initial update transaction history
-    // console.log(lastBlocks)
+    },[updateTrigger]);
+    
     const [inputValue, setInputValue] = React.useState<number>(0);
     const saveInputValue = async () => {
         if(typeof inputValue === "number" && !Number.isNaN(inputValue) && inputValue !== null) {
             await contract.methods.set(inputValue).send({from: wallet, value: 0});
-            await updateTransactionHistory();
+            setUpdateTrigger(updateTrigger + 1);
         }
     }
 
