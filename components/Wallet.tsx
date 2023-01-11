@@ -90,14 +90,12 @@ export default function Wallet() {
         )}
 
         {isConnected && (
-          <div className="flex  w-full justify-center space-x-2">
-            <button
-              onClick={handleDisconnect}
-              className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto"
-            >
-              Disconnect
-            </button>
-          </div>
+          <button
+            onClick={handleDisconnect}
+            className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto"
+          >
+            Disconnect
+          </button>
         )}
       </div>
     </div>
