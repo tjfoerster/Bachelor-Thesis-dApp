@@ -56,7 +56,7 @@ export default function Body() {
                     value={inputValue}
                     onChange={(e) => setInputValue(parseInt(e.target.value))}
                     disabled={!walletConnected}
-                    className="mt-8 mr-4 inline-flex w-full items-center justify-center rounded-md border border-transparent disabled:opacity-75 text-white px-5 py-3 text-base font-medium sm:w-auto"
+                    className="mt-8 mr-4 inline-flex w-full items-center justify-center rounded-md border border-transparent disabled:opacity-75 bg-secondary text-white px-5 py-3 text-base font-medium sm:w-auto"
                 />
                 <button
                     onClick={() => saveInputValue()}

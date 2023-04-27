@@ -8,7 +8,8 @@ module.exports = {
     extend: {
       colors: {
         'ganache': '#3fe0c5',
-        'truffle': '#ff6b4a'
+        'truffle': '#ff6b4a',
+        'secondary': '#2B2A33',
       }
     },
   },

@@ -41,30 +41,22 @@ export default function Wallet() {
   };
 
   return (
-    <div className="bg-truffle">
+    <div className="bg-secondary">
       <div className="mx-auto max-w-7xl items-center justify-between p-6 lg:px-8">
 
         
-          <div className="flex">
-            {showConnectButton && (
+          <div className="flex items-center">
+            {(showConnectButton || isConnected) && (
               <button
-                onClick={handleConnect}
-                className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto"
+                onClick={() => isConnected ? handleDisconnect() : handleConnect()}
+                className="inline-flex w-40 items-center justify-center rounded-md border border-transparent bg-truffle text-white px-5 py-3 text-base font-medium"
               >
-                {status === "loading" ? <Loading /> : "Connect Wallet"}
-              </button>
-            )}
-            {isConnected && (
-              <button
-                onClick={handleDisconnect}
-                className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto"
-              >
-                Disconnect
+                {isConnected ? "Disconnect" : (status === "loading" ? <Loading /> : "Connect Wallet")}
               </button>
             )}
             {showInstallMetamask && (
               <Link href="https://metamask.io/" target="_blank">
-                <a className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto">
+                <a className="inline-flex w-40 items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium">
                   Install Metamask
                 </a>
               </Link>
