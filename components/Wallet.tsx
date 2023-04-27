@@ -4,7 +4,6 @@ import { useMetamask } from "../hooks/useMetamask";
 import { Loading } from "./Loading";
 import truffleConfig from "../truffle-config";
 import Web3 from "web3";
-import React from "react";
 
 export const web3 = new Web3(
   Web3.givenProvider || `http://${truffleConfig.networks.development.host}:${truffleConfig.networks.development.port}`
@@ -43,60 +42,48 @@ export default function Wallet() {
 
   return (
     <div className="bg-truffle">
-      <div className="mx-auto max-w-2xl py-16 px-4 text-center sm:py-20 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl items-center justify-between p-6 lg:px-8">
+
         
-        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-          <span className="block">Zahlungsmittelbestand DApp-Prototyp</span>
-        </h2>
-
-        {wallet && balance && (
-          <div className=" px-4 py-5 sm:px-6">
-            <div className="-ml-4 -mt-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
-              <div className="ml-4 mt-4">
-                <div className="flex items-center">
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium leading-6 text-white">
-                      Address: <span>{wallet}</span>
-                    </h3>
-                    <p className="text-sm text-white">
-                      Balance:{" "}
-                      <span>
-                        {(parseInt(balance) / 1e18).toFixed(4)}{" "}
-                        ETH
-                      </span>
-                    </p>
-                  </div>
-                </div>
+          <div className="flex">
+            {showConnectButton && (
+              <button
+                onClick={handleConnect}
+                className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto"
+              >
+                {status === "loading" ? <Loading /> : "Connect Wallet"}
+              </button>
+            )}
+            {isConnected && (
+              <button
+                onClick={handleDisconnect}
+                className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto"
+              >
+                Disconnect
+              </button>
+            )}
+            {showInstallMetamask && (
+              <Link href="https://metamask.io/" target="_blank">
+                <a className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto">
+                  Install Metamask
+                </a>
+              </Link>
+            )}
+            {wallet && balance && (
+              <div className="ml-3">
+                <h3 className="text-lg font-medium leading-6 text-white">
+                  Address: <span className="font-bold">{wallet}</span>
+                </h3>
+                <p className="text-sm text-white">
+                  Balance:{" "}
+                  <span className="font-bold">
+                    {(parseInt(balance) / 1e18).toFixed(4)}{" "}
+                    ETH
+                  </span>
+                </p>
               </div>
-            </div>
+            )}
           </div>
-        )}
-
-        {showConnectButton && (
-          <button
-            onClick={handleConnect}
-            className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto"
-          >
-            {status === "loading" ? <Loading /> : "Connect Wallet"}
-          </button>
-        )}
-
-        {showInstallMetamask && (
-          <Link href="https://metamask.io/" target="_blank">
-            <a className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto">
-              Install Metamask
-            </a>
-          </Link>
-        )}
-
-        {isConnected && (
-          <button
-            onClick={handleDisconnect}
-            className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-ganache text-white px-5 py-3 text-base font-medium  sm:w-auto"
-          >
-            Disconnect
-          </button>
-        )}
       </div>
     </div>
   );
